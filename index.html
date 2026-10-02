@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wani and Sons creates handcrafted walnut wood products in Kashmir.">
+    <title>Wani and Sons | Walnut Woodcraft</title>
+    <style>
+        :root { --ink: #17130f; --panel: #211a15; --paper: #f3eee6; --muted: #b9aa98; --gold: #d9aa67; --line: rgba(217, 170, 103, .34); }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; background: var(--ink); color: var(--paper); font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; }
+        a { color: inherit; }
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        .shell { width: min(1120px, calc(100% - 40px)); margin: auto; }
+        .site-header { position: sticky; top: 0; z-index: 5; background: rgba(23, 19, 15, .95); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+        .header-inner, nav, .nav-list { display: flex; align-items: center; }
+        .header-inner { justify-content: space-between; min-height: 76px; gap: 24px; }
+        .brand { text-decoration: none; letter-spacing: .08em; font-weight: bold; }
+        .brand small { display: block; color: var(--gold); font: 11px Arial, sans-serif; letter-spacing: .18em; }
+        .nav-list { list-style: none; gap: 22px; padding: 0; margin: 0; font: 14px Arial, sans-serif; }
+        .nav-list a { color: var(--muted); text-decoration: none; }
+        .nav-list a:hover, .nav-list a:focus-visible { color: var(--gold); }
+        .language-select { background: var(--ink); color: var(--paper); border: 1px solid var(--line); padding: 9px; border-radius: 4px; }
+        .hero { padding: 110px 0 92px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, rgba(23, 19, 15, .92) 0%, rgba(23, 19, 15, .76) 52%, rgba(23, 19, 15, .3) 100%), url("https://media.assettype.com/kashmirtimes/2025-02-04/izlyu5k3/Chinar-Trees-in-Kashmir-Sheikh-Gulzar.jpg?w=1200&h=900&auto=format%2Ccompress&fit=max&enlarge=true") center 45% / cover no-repeat; }
+        .eyebrow { color: var(--gold); font: 12px Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+        h1, h2, h3, p { margin-top: 0; }
+        h1 { max-width: 760px; margin-bottom: 22px; font-size: clamp(46px, 8vw, 96px); line-height: .98; font-weight: normal; }
+        .hero-copy { max-width: 590px; color: var(--muted); font-size: 19px; }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+        .button { display: inline-block; padding: 12px 18px; border: 1px solid var(--gold); border-radius: 4px; text-decoration: none; font: bold 14px Arial, sans-serif; }
+        .button.primary { background: var(--gold); color: var(--ink); }
+        .button:hover, .button:focus-visible { transform: translateY(-2px); }
+        section { padding: 78px 0; border-bottom: 1px solid var(--line); }
+        .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 28px; }
+        h2 { margin-bottom: 0; font-size: clamp(32px, 5vw, 52px); font-weight: normal; }
+        .section-note { max-width: 430px; margin-bottom: 0; color: var(--muted); }
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .product-card { background: var(--panel); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+        .product-card-link { display: block; color: inherit; text-decoration: none; border-radius: 5px; }
+        .product-card-link:hover .product-card { border-color: var(--gold); }
+        .product-card-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+        .product-photo { aspect-ratio: 4 / 3; display: grid; place-items: center; background: #2d2119; color: var(--muted); padding: 22px; text-align: center; font: 14px Arial, sans-serif; }
+        .product-photo-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; }
+        .product-photo-full-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; }
+        .product-photo-full-trio { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; }
+        .product-photo img, .product-photo svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .product-photo img.fit-whole { object-fit: contain; background: #fff; }
+        .product-photo-full-pair img { object-fit: contain; background: #fff; }
+        .product-photo-full-trio img { object-fit: contain; background: #fff; }
+        .product-info { padding: 18px; }
+        .product-info h3 { margin-bottom: 4px; font-size: 22px; font-weight: normal; }
+        .product-info p { margin-bottom: 0; color: var(--muted); font-size: 15px; }
+        .product-price { color: var(--gold); font: bold 14px Arial, sans-serif; margin-top: 14px; }
+        .story-grid, .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+        .story-section { background: linear-gradient(rgba(23, 19, 15, .76), rgba(23, 19, 15, .8)), url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfplr_pmOikG2o_xBzvuceB699M_s1eaEzzS6GAPzXipnqRybFeZ2bgM&s=10") center 70% / cover no-repeat; }
+        .story-grid p, .contact-grid p { color: var(--muted); }
+        .feature-list { list-style: none; padding: 0; margin: 0; }
+        .feature-list li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+        .feature-list strong { display: block; color: var(--gold); }
+        .contact-card { border: 1px solid var(--line); padding: 24px; background-color: var(--panel); background-image: linear-gradient(rgba(23, 19, 15, .68), rgba(23, 19, 15, .76)), url("https://i.pinimg.com/736x/39/95/89/399589fa02c86b8f268aa933acd1edd8.jpg"); background-position: center, center; background-size: auto, contain; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(217, 170, 103, .15); }
+        .contact-grid .contact-prompt { color: var(--gold); font: 24px/1.3 Georgia, 'Times New Roman', serif; margin-bottom: 24px; }
+        .contact-craft-photo { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; margin-top: 24px; background: var(--panel); border-radius: 10px; }
+        .contact-card a { color: var(--paper); }
+        .contact-card a:hover { color: var(--gold); }
+        .contact-row { margin-bottom: 28px; }
+        .contact-row .label { display: block; font-size: 24px; color: var(--paper); margin-bottom: 8px; font-family: Georgia, 'Times New Roman', serif; }
+        .contact-row a { display: inline-block; font-size: clamp(24px, 2.1vw, 36px); text-decoration: none; }
+        .contact-row .address-value { color: var(--paper); font: 17px/1.5 Arial, sans-serif; }
+        .button.secondary { background: transparent; color: var(--paper); border-color: var(--line); }
+        .contact-actions { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+        .admin-hidden { display: none; }
+        .admin-visible { display: inline-block; }
+        .enquiry-dialog { width: min(560px, calc(100vw - 32px)); border: 1px solid var(--line); border-radius: 12px; background: #1d1714; color: var(--paper); padding: 0; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+        .enquiry-dialog::backdrop { background: rgba(0, 0, 0, .55); }
+        .product-details-dialog { width: min(1080px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: auto; overscroll-behavior: contain; }
+        .product-details-dialog .close-dialog-btn { z-index: 2; }
+        .product-details-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 24px; padding: 24px; }
+        .product-details-gallery { min-width: 0; min-height: 0; }
+        .product-details-gallery.has-thumbnails { display: grid; grid-template-columns: minmax(0, 1fr) 72px; gap: 10px; align-items: start; }
+        .product-image-stage { display: flex; align-items: center; justify-content: center; width: 100%; height: min(48vh, 420px); min-height: 0; overflow: hidden; border: 1px solid var(--line); background: #100d0b; touch-action: none; user-select: none; }
+        .product-image-stage img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center; transition: none; cursor: zoom-in; touch-action: none; user-select: none; -webkit-user-drag: none; }
+        .product-image-stage img[data-zoomed="true"] { cursor: zoom-out; }
+        .product-thumbnails { display: grid; grid-auto-rows: 64px; gap: 8px; max-height: min(48vh, 420px); overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; margin: 0; padding: 0 3px 0 0; }
+        .product-details-gallery.has-thumbnails .product-thumbnails { padding-top: 46px; }
+        .product-thumbnails:empty { display: none; }
+        .product-thumbnail { width: 64px; aspect-ratio: 1; padding: 3px; border: 1px solid var(--line); border-radius: 4px; background: #100d0b; cursor: pointer; }
+        .product-thumbnail.selected, .product-thumbnail:hover, .product-thumbnail:focus-visible { border-color: var(--gold); }
+        .product-thumbnail img { display: block; width: 100%; height: 100%; object-fit: contain; }
+        .product-details-copy { display: flex; flex-direction: column; align-items: flex-start; padding: 24px 8px; }
+        .product-details-copy .eyebrow { margin-bottom: 12px; }
+        .product-details-copy h2 { margin: 0 0 14px; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; }
+        .product-details-description { color: var(--muted); font-size: 18px; }
+        .product-details-price { margin: auto 0 18px; color: var(--gold); font: bold 14px Arial, sans-serif; }
+        .google-form-panel { padding: 24px; }
+        .google-form-panel h3 { margin-bottom: 16px; font-size: 32px; font-weight: normal; }
+        .google-form-setup { color: var(--muted); font: 15px/1.6 Arial, sans-serif; }
+        .google-form-frame { display: block; width: 100%; height: min(72vh, 680px); border: 0; background: #fff; }
+        .google-form-frame.hidden { display: none; }
+        .close-dialog-btn { position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border: 1px solid var(--line); background: transparent; color: var(--paper); border-radius: 50%; cursor: pointer; font-size: 22px; line-height: 1; }
+        .close-dialog-btn:hover { border-color: var(--gold); color: var(--gold); }
+        footer { padding: 28px 0; color: var(--muted); font: 13px Arial, sans-serif; }
+        @media (max-width: 760px) {
+            .shell { width: min(100% - 28px, 620px); }
+            .header-inner { align-items: flex-start; padding: 16px 0; flex-direction: column; }
+            .nav-list { flex-wrap: wrap; gap: 12px 18px; }
+            .hero { padding: 76px 0 62px; background-image: linear-gradient(rgba(23, 19, 15, .78), rgba(23, 19, 15, .84)), url("https://media.assettype.com/kashmirtimes/2025-02-04/izlyu5k3/Chinar-Trees-in-Kashmir-Sheikh-Gulzar.jpg?w=1200&h=900&auto=format%2Ccompress&fit=max&enlarge=true"); background-position: center, 58% center; }
+            section { padding: 56px 0; }
+            .section-heading, .story-grid, .contact-grid { display: block; }
+            .section-note { margin-top: 12px; }
+            .product-grid { grid-template-columns: 1fr; }
+            .contact-card { margin-top: 24px; }
+            .product-details-layout { grid-template-columns: 1fr; gap: 12px; padding: 18px 16px; }
+            .product-image-stage { height: min(36vh, 280px); }
+            .product-details-gallery.has-thumbnails { grid-template-columns: minmax(0, 1fr) 56px; gap: 8px; }
+            .product-thumbnails { grid-auto-rows: 48px; max-height: min(38vh, 300px); }
+            .product-thumbnail { width: 48px; }
+            .product-details-copy { padding: 6px 0; }
+            .product-details-price { margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="#home">WANI &amp; SONS<small>WALNUT WOODCRAFT</small></a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#story">Our craft</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><label for="language" class="visually-hidden">Choose language</label><select id="language" class="language-select"><option>English</option><option>Urdu</option><option>Hindi</option><option>Kashmiri</option><option>Arabic</option></select></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home">
+        <section class="hero">
+            <div class="shell">
+                <p class="eyebrow" data-i18n="eyebrow">Made in Kashmir · Made to last</p>
+                <h1 data-i18n="heroTitle">Walnut wood with a story to tell.</h1>
+                <p class="hero-copy" data-i18n="heroCopy">From heirloom furniture and boxes to custom hand-carved figures and sculptures, we shape walnut wood into pieces inspired by your ideas.</p>
+                <div class="actions"><a class="button primary" href="#products" data-i18n="explore">Explore products</a><a class="button" href="tel:+916006442364">Call +91 6006442364</a></div>
+            </div>
+        </section>
+
+        <section id="products">
+            <div class="shell">
+                <div class="section-heading"><h2 data-i18n="featured">Featured work</h2><p class="section-note">Our craft goes beyond furniture. Alongside beds, chairs, and other pieces, we create custom hand-carved wooden figures and sculptures inspired by animals, objects, or your own ideas.</p></div>
+                <div class="product-grid">
+                    <a class="product-card-link" href="#contact" aria-label="Ask about walnut boxes"><article class="product-card"><div class="product-photo product-photo-pair"><img src="https://www.drifttreasure.co.uk/wp-content/uploads/2022/09/handcarved-walnut-wood-box-500x550.jpg" alt="Hand-carved walnut keepsake box"><img src="https://thekaycraft.com/wp-content/uploads/2019/04/thekaycraft-walnut-wood-treasure-box-1.jpg" alt="Walnut wood treasure box"></div><div class="product-info"><h3>Walnut boxes</h3><p>Hand-carved walnut keepsake boxes turn everyday treasures into lasting heirlooms.</p><div class="product-price">Custom orders</div></div></article></a>
+                    <a class="product-card-link" href="#contact" aria-label="Ask about tables and chairs"><article class="product-card"><div class="product-photo product-photo-pair"><img src="https://i.pinimg.com/564x/67/76/d6/6776d6b0ed15e3482d223c91eb6abff6.jpg" alt="Walnut dining table and chair set in a room"><img class="fit-whole" src="https://2.imimg.com/data2/DM/RM/MY-718357/dining-table-500x500.jpg" alt="Full view of a handcrafted walnut dining table and chair set"></div><div class="product-info"><h3>Tables &amp; chairs</h3><p>Gather around walnut tables and chairs, where flowing grain brings warmth to every meal.</p><div class="product-price">Made to measure</div></div></article></a>
+                    <a class="product-card-link" href="#contact" aria-label="Ask about doors and windows"><article class="product-card"><div class="product-photo product-photo-full-pair"><img src="https://5.imimg.com/data5/SELLER/Default/2023/10/355649318/GM/NZ/HS/10341131/whatsapp-image-2023-10-10-at-10-03-04-am-1.jpeg" alt="Intricately carved wooden double door"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMfRjIfMpolhNPK4Ovh1mAevo4AMWjxKThNF_k3DpQFFGDZrG2uA3yBTY&s=10" alt="Carved wooden window with decorative shutters"></div><div class="product-info"><h3>Doors &amp; windows</h3><p>Carved walnut details welcome the light and give each entrance its own character.</p><div class="product-price">Project enquiries</div></div></article></a>
+                    <a class="product-card-link" href="#contact" aria-label="Ask about beds and furniture"><article class="product-card"><div class="product-photo"><img src="https://zazwoodengineering.com/wp-content/themes/zaxwoodengineering/assets/images/bedn2.jpg" alt="Handcrafted walnut bed and bedroom furniture"></div><div class="product-info"><h3>Beds &amp; furniture</h3><p>Solid walnut forms bring calm lines, lasting strength, and warmth to your home.</p><div class="product-price">Custom orders</div></div></article></a>
+                    <a class="product-card-link" href="#contact" aria-label="Ask about frames and decor"><article class="product-card"><div class="product-photo product-photo-full-trio"><img src="https://cdn.swadeshonline.com/v2/patient-paper-41f385/swad-p/wrkr/products/pictures/item/free/resize-w:720/Z5XwmcQw8-471051477001_1_LS.jpg" alt="Carved walnut floral panel in a decorative picture frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzud5juwNtvosJ1YAGnUxvITFhEZk-zoWOGHXmoshzWvVd9bjYf7ddpEN9&s=10" alt="Detailed hand-carved wooden floral frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfplr_pmOikG2o_xBzvuceB699M_s1eaEzzS6GAPzXipnqRybFeZ2bgM&s=10" alt="Craftsperson hand-carving a floral walnut panel"></div><div class="product-info"><h3>Frames &amp; decor</h3><p>Carved walnut frames and accents give artwork, photographs, and quiet corners a character of their own.</p><div class="product-price">Ask for a quote</div></div></article></a>
+                    <a class="product-card-link" href="#contact" aria-label="Ask about bookcases"><article class="product-card"><div class="product-photo product-photo-full-pair"><img src="https://cdn20.pamono.com/p/g/1/7/1729632_bah83cf75c/hand-carved-oriental-wooden-cabinet-bookshelf-shelf-nuristan-afghanistan-1980s-5.jpg" alt="Carved wooden bookcase with cabinet storage"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLTRxjtPiEIDVTjcYHst503SIrMxH-WHVCOA6d9-QNrdc5foOUwIaO4IL1&s=10" alt="Hand-carved wooden bookshelf"></div><div class="product-info"><h3>Bookcases</h3><p>Custom walnut shelving gives treasured books and objects a place in the room.</p><div class="product-price">Made to measure</div></div></article></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about"><div class="shell story-grid"><div><p class="eyebrow">About Wani &amp; Sons</p><h2>Walnut craft, made around you.</h2></div><div><p>Based in the heart of downtown Srinagar, Kashmir, a hub of artisans, Wani &amp; Sons creates useful, lasting pieces from walnut wood chosen for its natural character and strength. We ship our products worldwide.</p><p>Our work ranges from furniture and keepsake boxes to carved figures, doors and windows, frames, decor, and bookcases. We welcome custom ideas and shape each piece around its purpose, the wood, and the space it will live in.</p></div></div></section>
+
+        <section id="story" class="story-section"><div class="shell story-grid"><div><p class="eyebrow">The Wani &amp; Sons way</p><h2>Material first. Details always.</h2></div><div><p>Every piece begins with the grain, tone, and natural shape of the wood. We work carefully so the finished object feels useful today and worth keeping for years.</p><ul class="feature-list"><li><strong>01 · Honest materials</strong>Walnut wood selected for character and strength.</li><li><strong>02 · Thoughtful making</strong>Each order is handled with care from brief to finish.</li><li><strong>03 · Built around you</strong>Custom sizes and project conversations welcome.</li></ul></div></div></section>
+
+        <section id="contact"><div class="shell contact-grid"><div><p class="eyebrow">Start a conversation</p><h2>Have a piece in mind?</h2><p>Tell us what you are looking for, share your measurements, or ask about a custom walnut project.</p><img class="contact-craft-photo" src="https://miro.medium.com/max/1260/0*bZYawqgfEc0VmMcs.jpg" alt="Artisan's hands carving an intricate walnut panel"></div><div class="contact-card"><p class="contact-prompt">Have an idea? Call us and let’s shape it into something extraordinary.</p><p class="contact-row"><span class="label">Phone</span><a href="tel:+916006442364">+91 6006442364</a></p><p class="contact-row"><span class="label">Email</span><a href="mailto:javeedrafiq994@gmail.com">javeedrafiq994@gmail.com</a></p><p class="contact-row"><span class="label">Address</span><span class="address-value">Srinagar, Jammu and Kashmir</span></p><p class="contact-row"><span class="label">Factory outlet</span><a class="address-value" href="https://www.google.com/maps/search/?api=1&amp;query=Main%20Chowk%2C%20Kawadara%2C%20Srinagar" target="_blank" rel="noopener noreferrer" aria-label="View Main Chowk, Kawadara on Google Maps">Main Chowk, Kawadara</a></p><div class="contact-actions"><button class="button primary" type="button" id="openEnquiry">Send an enquiry</button></div></div></div></section>
+    </main>
+    <dialog id="enquiryDialog" class="enquiry-dialog">
+        <button class="close-dialog-btn" type="button" aria-label="Close enquiry dialog" id="closeDialogX">×</button>
+        <div class="google-form-panel">
+            <h3>Send an enquiry</h3>
+            <p class="google-form-setup" id="googleFormSetup">Create a Google Form, connect its responses to your private Sheet, and paste its embed URL into the website settings to enable submissions.</p>
+            <iframe class="google-form-frame hidden" id="googleEnquiryForm" title="Send a website enquiry" loading="lazy"></iframe>
+        </div>
+    </dialog>
+    <dialog id="productDetailsDialog" class="enquiry-dialog product-details-dialog" aria-labelledby="productDetailsTitle">
+        <button class="close-dialog-btn" type="button" aria-label="Close product details" id="closeProductDetails">×</button>
+        <div class="product-details-layout">
+            <div class="product-details-gallery">
+                <div class="product-image-stage" id="productImageStage"><img id="productDetailsImage" alt=""></div>
+                <div class="product-thumbnails" id="productThumbnails" role="group" tabindex="0" aria-label="Product photos"></div>
+            </div>
+            <div class="product-details-copy">
+                <p class="eyebrow">Wani &amp; Sons · Handcrafted in Kashmir</p>
+                <h2 id="productDetailsTitle"></h2>
+                <p class="product-details-description" id="productDetailsDescription"></p>
+                <p class="product-details-price" id="productDetailsPrice"></p>
+                <a class="button primary" id="productEnquiryLink" href="#contact">Ask about this piece</a>
+            </div>
+        </div>
+    </dialog>
+    <footer><div class="shell">&copy; 2026 Wani &amp; Sons · Walnut woodcraft from Kashmir</div></footer>
+    <script>
+        const translations = {
+            English: ['Made in Kashmir · Made to last', 'Walnut wood with a story to tell.', 'From heirloom furniture and boxes to custom hand-carved figures and sculptures, we shape walnut wood into pieces inspired by your ideas.', 'Explore products', 'Featured work'],
+            Urdu: ['کشمیر میں تیار · دیرپا معیار', 'اخروٹ کی لکڑی، ایک کہانی کے ساتھ۔', 'اخروٹ کی لکڑی سے ہاتھ سے تیار کردہ فرنیچر، ڈبے اور اندرونی سجاوٹ کی اشیاء۔', 'مصنوعات دیکھیں', 'نمایاں کام'],
+            Hindi: ['कश्मीर में निर्मित · लंबे समय के लिए', 'अखरोट की लकड़ी, एक कहानी के साथ।', 'अखरोट की लकड़ी से हाथ से बनाया गया फर्नीचर، बक्से और सजावटी वस्तुएँ।', 'उत्पाद देखें', 'विशेष कार्य'],
+            Kashmiri: ['کٲشِر منز تیار · پٲیمہ معیار', 'والنٹ لکڑی، اکھ کہانی سۭتۍ۔', 'والنٹ لکڑی سۭتۍ ہاتھہ سۭتۍ بناونہ فرنیچر، ڈبہ تہِ اندرونی سجاوٹ۔', 'پروڈکٹ دِیِو', 'خاص کام'],
+            Arabic: ['صُنع في كشمير · صُنع ليدوم', 'خشب الجوز يحمل قصة.', 'أثاث وصناديق وقطع داخلية مصنوعة يدوياً من خشب الجوز الطبيعي.', 'استكشف المنتجات', 'أعمال مميزة']
+        };
+        const keys = ['eyebrow', 'heroTitle', 'heroCopy', 'explore', 'featured'];
+        const googleFormEmbedUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeXVEpMDMl8po2WWYsZiMIWxuyobMJXXwH0s9n3MrZtQ3a_dw/viewform?embedded=true';
+        const enquiryDialog = document.getElementById('enquiryDialog');
+        const openEnquiryButton = document.getElementById('openEnquiry');
+        const closeDialogXButton = document.getElementById('closeDialogX');
+        const googleEnquiryForm = document.getElementById('googleEnquiryForm');
+        const googleFormSetup = document.getElementById('googleFormSetup');
+
+        if (googleFormEmbedUrl.startsWith('https://docs.google.com/forms/') && googleFormEmbedUrl.includes('/viewform')) {
+            googleEnquiryForm.src = googleFormEmbedUrl;
+            googleEnquiryForm.classList.remove('hidden');
+            googleFormSetup.hidden = true;
+        }
+
+        function openEnquiryDialog() {
+            if (typeof enquiryDialog.showModal === 'function') {
+                enquiryDialog.showModal();
+            } else {
+                enquiryDialog.setAttribute('open', 'open');
+            }
+        }
+
+        function closeEnquiryDialog() {
+            if (typeof enquiryDialog.close === 'function') {
+                enquiryDialog.close();
+            } else {
+                enquiryDialog.removeAttribute('open');
+            }
+        }
+
+        openEnquiryButton.addEventListener('click', openEnquiryDialog);
+        closeDialogXButton.addEventListener('click', closeEnquiryDialog);
+
+        const productDetailsDialog = document.getElementById('productDetailsDialog');
+        const closeProductDetailsButton = document.getElementById('closeProductDetails');
+        const productDetailsGallery = document.querySelector('.product-details-gallery');
+        const productImageStage = document.getElementById('productImageStage');
+        const productDetailsImage = document.getElementById('productDetailsImage');
+        const productThumbnails = document.getElementById('productThumbnails');
+        let productImages = [];
+        let activeProductImage = 0;
+        let productZoom = 1;
+        let productPanX = 0;
+        let productPanY = 0;
+        let pinchStartDistance = 0;
+        let pinchStartZoom = 1;
+        let pinchStartMidpoint = null;
+        let pinchStartPanX = 0;
+        let pinchStartPanY = 0;
+        let touchDragStart = null;
+        const activeImagePointers = new Map();
+
+        function updateProductImageTransform() {
+            productDetailsImage.style.transform = `translate3d(${productPanX}px, ${productPanY}px, 0) scale(${productZoom})`;
+            productDetailsImage.dataset.zoomed = String(productZoom > 1);
+        }
+
+        function renderProductImage(index) {
+            activeProductImage = (index + productImages.length) % productImages.length;
+            const photo = productImages[activeProductImage];
+            productDetailsImage.src = photo.src;
+            productDetailsImage.alt = photo.alt;
+            updateProductImageTransform();
+            productThumbnails.replaceChildren();
+
+            productDetailsGallery.classList.toggle('has-thumbnails', productImages.length > 1);
+            if (productImages.length < 2) return;
+
+            productImages.forEach((item, photoIndex) => {
+                const thumbnailButton = document.createElement('button');
+                thumbnailButton.type = 'button';
+                thumbnailButton.className = `product-thumbnail${photoIndex === activeProductImage ? ' selected' : ''}`;
+                thumbnailButton.setAttribute('aria-label', `Show photo ${photoIndex + 1}`);
+                thumbnailButton.setAttribute('aria-pressed', String(photoIndex === activeProductImage));
+                const thumbnail = document.createElement('img');
+                thumbnail.src = item.src;
+                thumbnail.alt = '';
+                thumbnailButton.append(thumbnail);
+                thumbnailButton.addEventListener('click', () => {
+                    productZoom = 1;
+                    productPanX = 0;
+                    productPanY = 0;
+                    renderProductImage(photoIndex);
+                });
+                productThumbnails.append(thumbnailButton);
+            });
+        }
+
+        productDetailsImage.addEventListener('click', event => {
+            if (event.pointerType === 'touch' || event.pointerType === 'pen') return;
+            productZoom = productZoom > 1 ? 1 : 2;
+            productPanX = 0;
+            productPanY = 0;
+            renderProductImage(activeProductImage);
+        });
+
+        function getPointerDistance() {
+            const [first, second] = Array.from(activeImagePointers.values());
+            return first && second ? Math.hypot(first.x - second.x, first.y - second.y) : 0;
+        }
+
+        function getPointerMidpoint() {
+            const [first, second] = Array.from(activeImagePointers.values());
+            return first && second ? { x: (first.x + second.x) / 2, y: (first.y + second.y) / 2 } : null;
+        }
+
+        function clampProductPan() {
+            const imageWidth = productDetailsImage.naturalWidth || productImageStage.clientWidth;
+            const imageHeight = productDetailsImage.naturalHeight || productImageStage.clientHeight;
+            const fitScale = Math.min(productImageStage.clientWidth / imageWidth, productImageStage.clientHeight / imageHeight);
+            const fittedWidth = imageWidth * fitScale;
+            const fittedHeight = imageHeight * fitScale;
+            const maxPanX = Math.max(0, (fittedWidth * productZoom - productImageStage.clientWidth) / 2);
+            const maxPanY = Math.max(0, (fittedHeight * productZoom - productImageStage.clientHeight) / 2);
+            productPanX = Math.max(-maxPanX, Math.min(maxPanX, productPanX));
+            productPanY = Math.max(-maxPanY, Math.min(maxPanY, productPanY));
+        }
+
+        productImageStage.addEventListener('pointerdown', event => {
+            if (event.pointerType !== 'touch') return;
+            event.preventDefault();
+            if (event.isTrusted) productImageStage.setPointerCapture(event.pointerId);
+            activeImagePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+            if (activeImagePointers.size === 2) {
+                pinchStartDistance = Math.max(1, getPointerDistance());
+                pinchStartZoom = productZoom;
+                pinchStartMidpoint = getPointerMidpoint();
+                pinchStartPanX = productPanX;
+                pinchStartPanY = productPanY;
+                touchDragStart = null;
+            } else if (activeImagePointers.size === 1) {
+                touchDragStart = { x: event.clientX, y: event.clientY, panX: productPanX, panY: productPanY };
+            }
+        });
+
+        productImageStage.addEventListener('pointermove', event => {
+            if (!activeImagePointers.has(event.pointerId)) return;
+            activeImagePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+            if (activeImagePointers.size >= 2) {
+                productZoom = Math.max(.5, Math.min(5, pinchStartZoom * getPointerDistance() / pinchStartDistance));
+                const stageRect = productImageStage.getBoundingClientRect();
+                const midpoint = getPointerMidpoint();
+                const midpointOffsetX = pinchStartMidpoint.x - stageRect.left - stageRect.width / 2 - pinchStartPanX;
+                const midpointOffsetY = pinchStartMidpoint.y - stageRect.top - stageRect.height / 2 - pinchStartPanY;
+                const zoomRatio = productZoom / pinchStartZoom;
+                productPanX = midpoint.x - stageRect.left - stageRect.width / 2 - midpointOffsetX * zoomRatio;
+                productPanY = midpoint.y - stageRect.top - stageRect.height / 2 - midpointOffsetY * zoomRatio;
+                clampProductPan();
+                updateProductImageTransform();
+                event.preventDefault();
+            } else if (productZoom > 1 && touchDragStart) {
+                productPanX = touchDragStart.panX + event.clientX - touchDragStart.x;
+                productPanY = touchDragStart.panY + event.clientY - touchDragStart.y;
+                clampProductPan();
+                updateProductImageTransform();
+                event.preventDefault();
+            }
+        });
+
+        function endImagePointer(event) {
+            if (!activeImagePointers.has(event.pointerId)) return;
+            activeImagePointers.delete(event.pointerId);
+            if (activeImagePointers.size === 1) {
+                const point = Array.from(activeImagePointers.values())[0];
+                touchDragStart = { x: point.x, y: point.y, panX: productPanX, panY: productPanY };
+            } else {
+                touchDragStart = null;
+                pinchStartDistance = 0;
+                pinchStartMidpoint = null;
+            }
+        }
+
+        productImageStage.addEventListener('pointerup', endImagePointer);
+        productImageStage.addEventListener('pointercancel', endImagePointer);
+
+        productThumbnails.addEventListener('keydown', event => {
+            if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+            event.preventDefault();
+            productZoom = 1;
+            renderProductImage(activeProductImage + (event.key === 'ArrowDown' ? 1 : -1));
+            productThumbnails.querySelector('.selected')?.focus();
+        });
+
+        function openProductDetails(productLink) {
+            const card = productLink.querySelector('.product-card');
+            const images = Array.from(card.querySelectorAll('.product-photo img'));
+            const productInfo = card.querySelector('.product-info');
+            productImages = images.map(image => ({ src: image.src, alt: image.alt }));
+            activeProductImage = 0;
+            productZoom = 1;
+            productPanX = 0;
+            productPanY = 0;
+            document.getElementById('productDetailsTitle').textContent = productInfo.querySelector('h3').textContent;
+            document.getElementById('productDetailsDescription').textContent = productInfo.querySelector('p').textContent;
+            document.getElementById('productDetailsPrice').textContent = productInfo.querySelector('.product-price').textContent;
+            renderProductImage(0);
+            if (typeof productDetailsDialog.showModal === 'function') {
+                productDetailsDialog.showModal();
+            } else {
+                productDetailsDialog.setAttribute('open', 'open');
+            }
+        }
+
+        document.querySelectorAll('.product-card-link').forEach(productLink => {
+            productLink.setAttribute('aria-haspopup', 'dialog');
+            productLink.addEventListener('click', event => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                openProductDetails(productLink);
+            });
+        });
+
+        closeProductDetailsButton.addEventListener('click', () => productDetailsDialog.close());
+        document.getElementById('productEnquiryLink').addEventListener('click', () => productDetailsDialog.close());
+
+        document.querySelector('#language').addEventListener('change', event => {
+            const values = translations[event.target.value] || translations.English;
+            document.querySelectorAll('[data-i18n]').forEach((element, index) => element.textContent = values[keys.indexOf(element.dataset.i18n)] || element.textContent);
+            document.documentElement.dir = ['Urdu', 'Arabic', 'Kashmiri'].includes(event.target.value) ? 'rtl' : 'ltr';
+        });
+    </script>
+</body>
+</html>
